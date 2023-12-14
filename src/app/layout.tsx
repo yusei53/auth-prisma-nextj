@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "./components/navigation/Navigation";
 import getCurrentUser from "./actions/getCurrentUser";
+import ToasterContext from "./context/ToasterContext";
+import SignupModal from "./components/modals/SIgnupModal";
+import AuthContext from "./context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +23,9 @@ export default async function RootLayout({
   return (
     <html lang="ja">
       <body>
-        <div>
+        <AuthContext>
+          <ToasterContext />
+          <SignupModal />
           <div className="flex min-h-screen flex-col">
             <Navigation currentUser={currentUser} />
 
@@ -34,7 +39,7 @@ export default async function RootLayout({
               </div>
             </footer>
           </div>
-        </div>
+        </AuthContext>
       </body>
     </html>
   );
